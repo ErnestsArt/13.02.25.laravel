@@ -29,6 +29,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+        ]);
+
         $data = [
             'title' => $request->title,
             'content' => $request->content
@@ -53,6 +58,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        
         $post = Post::find($id);
         return view('posts.edit', ['post' => $post]);
     }
@@ -63,6 +69,11 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+
+        $validated = $request->validate([
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+        ]);
 
         $data = [
             'title' => $request->title,

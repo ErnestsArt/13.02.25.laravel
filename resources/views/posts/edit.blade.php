@@ -1,6 +1,12 @@
 <x-app-layout>
     <h1>Edit post</h1>
-
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     <form action="{{ route('posts.update', $post) }}" method="POST">
     @csrf
     @method('PUT')
